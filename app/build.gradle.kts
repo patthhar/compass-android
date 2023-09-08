@@ -77,6 +77,9 @@ dependencies {
   implementation(libs.room.runtime)
   implementation(libs.room.ktx)
   ksp(libs.room.compiler)
+
+  // For device sensors
+  implementation(libs.core)
 }
 
 kapt {
