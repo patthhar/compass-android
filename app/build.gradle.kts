@@ -22,6 +22,18 @@ android {
     vectorDrawables {
       useSupportLibrary = true
     }
+    externalNativeBuild {
+      cmake {
+        cppFlags.add("")
+      }
+    }
+  }
+
+  externalNativeBuild {
+    cmake {
+      path = file("src/main/cpp/CMakeLists.txt")
+      version = "3.22.1"
+    }
   }
 
   buildTypes {
