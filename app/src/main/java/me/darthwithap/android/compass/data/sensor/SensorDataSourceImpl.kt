@@ -1,4 +1,4 @@
-package me.darthwithap.android.compass.data
+package me.darthwithap.android.compass.data.sensor
 
 import android.content.Context
 import android.hardware.Sensor
@@ -8,8 +8,6 @@ import android.hardware.SensorManager
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import me.darthwithap.android.compass.data.sensor.CompassReadingDto
-import me.darthwithap.android.compass.data.sensor.SensorDataSource
 
 class SensorDataSourceImpl(
   context: Context

@@ -12,6 +12,8 @@ compose-bom = "2023.03.00"
 room = "2.5.1"
 hilt = "2.44"
 hilt-navigation-compose = "1.1.0-alpha01"
+gms = "21.0.1"
+coroutines-play-services = "1.7.1"
 
 [libraries]
 core = { group = "androidx.core", name = "core", version.ref = "core-ktx" }
@@ -36,6 +38,8 @@ hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref ="hilt"}
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref ="hilt"}
 hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-navigation-compose"}
+play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "gms" }
+coroutines-play-services = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-play-services", version.ref = "coroutines-play-services" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

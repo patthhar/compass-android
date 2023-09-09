@@ -68,6 +68,9 @@ dependencies {
   debugImplementation(libs.ui.tooling)
   debugImplementation(libs.ui.test.manifest)
 
+  // Kotlinx Coroutines Play Services
+  implementation(libs.coroutines.play.services)
+
   // Hilt
   implementation(libs.hilt.android)
   implementation(libs.hilt.navigation.compose)
@@ -80,6 +83,9 @@ dependencies {
 
   // For device sensors
   implementation(libs.core)
+
+  // Gms Play Services
+  implementation(libs.play.services.location)
 }
 
 kapt {
