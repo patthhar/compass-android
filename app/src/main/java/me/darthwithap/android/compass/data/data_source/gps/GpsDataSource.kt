@@ -1,13 +1,13 @@
-package me.darthwithap.android.compass.data.gps
+package me.darthwithap.android.compass.data.data_source.gps
 
 import android.annotation.SuppressLint
 import android.location.Location
 import com.google.android.gms.location.FusedLocationProviderClient
 import kotlinx.coroutines.tasks.await
 
-class GpsDataSourceImpl(
+class GpsDataSource(
     private val fusedLocationClient: FusedLocationProviderClient
-) : GpsDataSource {
+) : GpsData {
     @SuppressLint("MissingPermission")
     override suspend fun getCurrentLocation(): Location {
         fusedLocationClient.lastLocation.await().hasAltitude()

@@ -1,7 +1,7 @@
-package me.darthwithap.android.compass.data.gps
+package me.darthwithap.android.compass.data.data_source.gps
 
 import android.location.Location
 
-interface GpsDataSource {
+interface GpsData {
   suspend fun getCurrentLocation(): Location
 }

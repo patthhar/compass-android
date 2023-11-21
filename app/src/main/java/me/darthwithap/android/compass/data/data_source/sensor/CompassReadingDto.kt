@@ -1,4 +1,4 @@
-package me.darthwithap.android.compass.data.sensor
+package me.darthwithap.android.compass.data.data_source.sensor
 
 import me.darthwithap.android.compass.domain.models.CompassReading
 

@@ -1,4 +1,4 @@
-package me.darthwithap.android.compass.data.sensor
+package me.darthwithap.android.compass.data.data_source.sensor
 
 import android.content.Context
 import android.hardware.Sensor
@@ -10,9 +10,9 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import me.darthwithap.android.compass.domain.models.CalibrationState
 
-class SensorDataSourceImpl(
+class SensorDataSource(
     context: Context
-) : SensorDataSource {
+) : SensorData {
 
     private val compassReadingFlow: MutableSharedFlow<CompassReadingDto> = MutableSharedFlow()
     private val calibrationStateFlow: MutableSharedFlow<CalibrationState> = MutableSharedFlow()

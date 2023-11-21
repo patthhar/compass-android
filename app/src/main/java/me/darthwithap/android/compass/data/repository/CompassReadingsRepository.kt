@@ -3,14 +3,14 @@ package me.darthwithap.android.compass.data.repository
 import android.location.Location
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import me.darthwithap.android.compass.data.gps.GpsDataSource
-import me.darthwithap.android.compass.data.sensor.SensorDataSource
+import me.darthwithap.android.compass.data.data_source.gps.GpsData
+import me.darthwithap.android.compass.data.data_source.sensor.SensorData
 import me.darthwithap.android.compass.domain.models.CompassReading
 import me.darthwithap.android.compass.domain.repository.CompassRepository
 
-class CompassRepositoryImpl(
-    private val sensorDataSource: SensorDataSource,
-    private val gpsDataSource: GpsDataSource
+class CompassReadingsRepository(
+    private val sensorDataSource: SensorData,
+    private val gpsDataSource: GpsData
 ) : CompassRepository {
     override fun registerListeners() {
         sensorDataSource.registerListeners()
