@@ -1,5 +1,6 @@
 package me.darthwithap.android.compass.di
 
+import android.app.Application
 import android.content.Context
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -19,26 +20,21 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-    @Provides
-    @Singleton
-    fun providesAppContext(application: CompassApplication): Context {
-        return application.applicationContext
-    }
 
     @Provides
     @Singleton
     fun providesFusedLocationProviderClient(
-        appContext: Context
+        app: Application
     ): FusedLocationProviderClient {
-        return LocationServices.getFusedLocationProviderClient(appContext)
+        return LocationServices.getFusedLocationProviderClient(app.applicationContext)
     }
 
     @Provides
     @Singleton
     fun providesSensorDataSource(
-        appContext: Context
+        app: Application
     ): SensorData {
-        return SensorDataSource(appContext)
+        return SensorDataSource(app.applicationContext)
     }
 
     @Provides

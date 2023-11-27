@@ -1,28 +1,46 @@
 package me.darthwithap.android.compass
 
-import android.hardware.GeomagneticField
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import dagger.hilt.android.AndroidEntryPoint
+import me.darthwithap.android.compass.presentation.CompassReadingScreen
+import me.darthwithap.android.compass.presentation.Routes
+import me.darthwithap.android.compass.presentation.compass_readings.CompassReadingsViewModel
 import me.darthwithap.android.compass.ui.theme.CompassAndroidTheme
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    setContent {
-      CompassAndroidTheme {
-        // A surface container using the 'background' color from the theme
-        Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+        setContent {
+            CompassAndroidTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    val viewModel = hiltViewModel<CompassReadingsViewModel>()
+                    val state = viewModel.state
+
+                    NavHost(
+                        navController = rememberNavController(),
+                        startDestination = Routes.CompassReadingScreen
+                    ) {
+                        composable(route = Routes.CompassReadingScreen) {
+                            CompassReadingScreen(state)
+                        }
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }

@@ -29,4 +29,8 @@ class CompassReadingsRepository(
     override suspend fun getLastLocation(): Location {
         return gpsDataSource.getCurrentLocation()
     }
+
+    override fun close() {
+        sensorDataSource.closeSensor()
+    }
 }

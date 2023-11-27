@@ -10,4 +10,5 @@ interface CompassRepository {
   fun unregisterListeners()
   fun getCompassReading(): Flow<CompassReading>
   suspend fun getLastLocation(): Location
+  fun close()
 }

@@ -5,17 +5,24 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
+import me.darthwithap.android.compass.data.models.CompassReadingDto
 import me.darthwithap.android.compass.domain.models.CalibrationState
+import java.io.Closeable
 
 class SensorDataSource(
     context: Context
-) : SensorData {
+) : SensorData, Closeable {
 
     private val compassReadingFlow: MutableSharedFlow<CompassReadingDto> = MutableSharedFlow()
     private val calibrationStateFlow: MutableSharedFlow<CalibrationState> = MutableSharedFlow()
+    private val sensorScope = CoroutineScope(Dispatchers.Default)
 
     private val sensorManager: SensorManager =
         context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -60,7 +67,9 @@ class SensorDataSource(
                 pitch = pitch.toFloat(),
                 roll = roll.toFloat()
             )
-            compassReadingFlow.tryEmit(newReading)
+            sensorScope.launch {
+                compassReadingFlow.emit(newReading)
+            }
         }
 
         override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
@@ -106,5 +115,13 @@ class SensorDataSource(
 
     override fun unregisterListeners() {
         sensorManager.unregisterListener(sensorEventListener)
+    }
+
+    override fun closeSensor() {
+        close()
+    }
+
+    override fun close() {
+        sensorScope.cancel()
     }
 }
