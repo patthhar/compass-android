@@ -8,9 +8,9 @@ import kotlinx.coroutines.tasks.await
 class GpsDataSource(
     private val fusedLocationClient: FusedLocationProviderClient
 ) : GpsData {
-    @SuppressLint("MissingPermission")
-    override suspend fun getCurrentLocation(): Location {
-        fusedLocationClient.lastLocation.await().hasAltitude()
-        return fusedLocationClient.lastLocation.await()
-    }
+  @SuppressLint("MissingPermission")
+  override suspend fun getCurrentLocation(): Location {
+    fusedLocationClient.lastLocation.await().hasAltitude()
+    return fusedLocationClient.lastLocation.await()
+  }
 }

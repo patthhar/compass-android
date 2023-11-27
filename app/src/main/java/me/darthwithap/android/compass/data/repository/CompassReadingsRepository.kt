@@ -12,25 +12,25 @@ class CompassReadingsRepository(
     private val sensorDataSource: SensorData,
     private val gpsDataSource: GpsData
 ) : CompassRepository {
-    override fun registerListeners() {
-        sensorDataSource.registerListeners()
-    }
+  override fun registerListeners() {
+    sensorDataSource.registerListeners()
+  }
 
-    override fun unregisterListeners() {
-        sensorDataSource.unregisterListeners()
-    }
+  override fun unregisterListeners() {
+    sensorDataSource.unregisterListeners()
+  }
 
-    override fun getCompassReading(): Flow<CompassReading> {
-        return sensorDataSource.getCompassReadingState().map {
-            it.toDomainModel()
-        }
+  override fun getCompassReading(): Flow<CompassReading> {
+    return sensorDataSource.getCompassReadingState().map {
+      it.toDomainModel()
     }
+  }
 
-    override suspend fun getLastLocation(): Location {
-        return gpsDataSource.getCurrentLocation()
-    }
+  override suspend fun getLastLocation(): Location {
+    return gpsDataSource.getCurrentLocation()
+  }
 
-    override fun close() {
-        sensorDataSource.closeSensor()
-    }
+  override fun close() {
+    sensorDataSource.closeSensor()
+  }
 }

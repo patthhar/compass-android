@@ -8,8 +8,8 @@ data class CompassReadingsState(
     val error: AppError? = null
 ) {
 
-    companion object {
-        fun CompassReadingsState.isCompassReadingAvailable() = this.compassReading != null
-        fun CompassReadingsState.hasError() = this.error != null
-    }
+  companion object {
+    fun CompassReadingsState.isCompassReadingAvailable() = this.compassReading != null
+    fun CompassReadingsState.hasError() = this.error != null
+  }
 }

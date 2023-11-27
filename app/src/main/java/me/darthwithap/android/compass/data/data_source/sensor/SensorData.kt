@@ -5,9 +5,9 @@ import me.darthwithap.android.compass.data.models.CompassReadingDto
 import me.darthwithap.android.compass.domain.models.CalibrationState
 
 interface SensorData {
-    fun getCompassReadingState(): Flow<CompassReadingDto>
-    fun getCalibrationState(): Flow<CalibrationState>
-    fun registerListeners()
-    fun unregisterListeners()
-    fun closeSensor()
+  fun getCompassReadingState(): Flow<CompassReadingDto>
+  fun getCalibrationState(): Flow<CalibrationState>
+  fun registerListeners()
+  fun unregisterListeners()
+  fun closeSensor()
 }

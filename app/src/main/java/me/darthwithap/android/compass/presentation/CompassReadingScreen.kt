@@ -20,24 +20,24 @@ import me.darthwithap.android.compass.presentation.compass_readings.CompassReadi
 fun CompassReadingScreen(
     state: CompassReadingsState
 ) {
-    val context = LocalContext.current
+  val context = LocalContext.current
 
-    LaunchedEffect(key1 = state.error) {
-        state.error?.let {
-            Toast.makeText(context, it.errorMsg, Toast.LENGTH_SHORT).show()
-        }
+  LaunchedEffect(key1 = state.error) {
+    state.error?.let {
+      Toast.makeText(context, it.errorMsg, Toast.LENGTH_SHORT).show()
     }
+  }
 
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = "Direction: ${state.compassReading?.direction}",
-            style = MaterialTheme.typography.bodyMedium,
-            fontWeight = FontWeight.Bold
-        )
-        Spacer(modifier = Modifier.height(12.dp))
-        Text(text = "Degrees: ${state.compassReading?.azimuthInDegrees.toString()}")
-    }
+  Column(
+      modifier = Modifier.fillMaxSize(),
+      verticalArrangement = Arrangement.Center
+  ) {
+    Text(
+        text = "Direction: ${state.compassReading?.direction}",
+        style = MaterialTheme.typography.bodyMedium,
+        fontWeight = FontWeight.Bold
+    )
+    Spacer(modifier = Modifier.height(12.dp))
+    Text(text = "Degrees: ${state.compassReading?.azimuthInDegrees.toString()}")
+  }
 }

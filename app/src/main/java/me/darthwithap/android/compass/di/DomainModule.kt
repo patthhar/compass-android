@@ -11,9 +11,9 @@ import me.darthwithap.android.compass.domain.usecases.CompassReadingUseCase
 @Module
 @InstallIn(ViewModelComponent::class)
 object DomainModule {
-    @Provides
-    @ViewModelScoped
-    fun provideCompassReadingUseCase(
-        repository: CompassRepository
-    ): CompassReadingUseCase = CompassReadingUseCase(repository)
+  @Provides
+  @ViewModelScoped
+  fun provideCompassReadingUseCase(
+      repository: CompassRepository
+  ): CompassReadingUseCase = CompassReadingUseCase(repository)
 }

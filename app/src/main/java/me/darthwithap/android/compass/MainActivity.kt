@@ -19,28 +19,28 @@ import me.darthwithap.android.compass.ui.theme.CompassAndroidTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
 
-        setContent {
-            CompassAndroidTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    val viewModel = hiltViewModel<CompassReadingsViewModel>()
-                    val state = viewModel.state
+    setContent {
+      CompassAndroidTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+          val viewModel = hiltViewModel<CompassReadingsViewModel>()
+          val state = viewModel.state
 
-                    NavHost(
-                        navController = rememberNavController(),
-                        startDestination = Routes.CompassReadingScreen
-                    ) {
-                        composable(route = Routes.CompassReadingScreen) {
-                            CompassReadingScreen(state)
-                        }
-                    }
-                }
+          NavHost(
+              navController = rememberNavController(),
+              startDestination = Routes.CompassReadingScreen
+          ) {
+            composable(route = Routes.CompassReadingScreen) {
+              CompassReadingScreen(state)
             }
+          }
         }
+      }
     }
+  }
 }
