@@ -13,4 +13,5 @@ class GpsDataSource(
     fusedLocationClient.lastLocation.await().hasAltitude()
     return fusedLocationClient.lastLocation.await()
   }
+
 }

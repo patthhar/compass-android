@@ -6,11 +6,12 @@ import kotlinx.coroutines.flow.map
 import me.darthwithap.android.compass.data.data_source.gps.GpsData
 import me.darthwithap.android.compass.data.data_source.sensor.SensorData
 import me.darthwithap.android.compass.domain.models.CompassReading
+import me.darthwithap.android.compass.domain.models.NorthType
 import me.darthwithap.android.compass.domain.repository.CompassRepository
 
 class CompassReadingsRepository(
-    private val sensorDataSource: SensorData,
-    private val gpsDataSource: GpsData
+  private val sensorDataSource: SensorData,
+  private val gpsDataSource: GpsData
 ) : CompassRepository {
   override fun registerListeners() {
     sensorDataSource.registerListeners()
@@ -20,8 +21,8 @@ class CompassReadingsRepository(
     sensorDataSource.unregisterListeners()
   }
 
-  override fun getCompassReading(): Flow<CompassReading> {
-    return sensorDataSource.getCompassReadingState().map {
+  override fun getCompassReading(northType: NorthType): Flow<CompassReading> {
+    return sensorDataSource.getCompassReadingState(northType).map {
       it.toDomainModel()
     }
   }

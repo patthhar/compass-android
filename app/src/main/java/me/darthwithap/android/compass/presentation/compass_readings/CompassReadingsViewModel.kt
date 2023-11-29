@@ -37,6 +37,7 @@ class CompassReadingsViewModel @Inject constructor(
     when (event) {
       CompassReadingEvent.GetCompassReadings -> {
         viewModelScope.launch {
+          // Todo: Add northType as the parameter to the useCase here
           handleUseCase(getCompassReading()) {
             state = state.copy(compassReading = it)
           }

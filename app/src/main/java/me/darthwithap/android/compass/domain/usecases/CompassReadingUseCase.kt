@@ -3,6 +3,7 @@ package me.darthwithap.android.compass.domain.usecases
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import me.darthwithap.android.compass.domain.models.CompassReading
+import me.darthwithap.android.compass.domain.models.NorthType
 import me.darthwithap.android.compass.domain.models.ReadingDirection
 import me.darthwithap.android.compass.domain.repository.CompassRepository
 import me.darthwithap.android.compass.util.AppException
@@ -14,10 +15,12 @@ class CompassReadingUseCase(
 
   private var lastNormalizedDegreeInt: Int? = null
 
-  suspend operator fun invoke(): Flow<AppResult<CompassReading>> {
+  suspend operator fun invoke(
+    northType: NorthType = NorthType.Magnetic
+  ): Flow<AppResult<CompassReading>> {
     return flow {
       try {
-        repository.getCompassReading().collect { rawCompassReading ->
+        repository.getCompassReading(NorthType.Magnetic).collect { rawCompassReading ->
           val compassReading = rawCompassReading.copy(
             direction = findDirection(rawCompassReading.azimuthInDegrees),
             normalizedDegrees = normalizeDegrees(rawCompassReading.azimuthInDegrees)
