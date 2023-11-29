@@ -1,6 +1,5 @@
 package me.darthwithap.android.compass.domain.usecases
 
-import android.util.Log
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import me.darthwithap.android.compass.domain.models.CompassReading
@@ -12,8 +11,9 @@ import me.darthwithap.android.compass.util.AppResult
 class CompassReadingUseCase(
   private val repository: CompassRepository
 ) {
-  private val TAG = "SOme Tag bro"
+
   private var lastNormalizedDegreeInt: Int? = null
+
   suspend operator fun invoke(): Flow<AppResult<CompassReading>> {
     return flow {
       try {
@@ -22,15 +22,11 @@ class CompassReadingUseCase(
             direction = findDirection(rawCompassReading.azimuthInDegrees),
             normalizedDegrees = normalizeDegrees(rawCompassReading.azimuthInDegrees)
           )
-          Log.d(TAG, "invoke: Last Normalsed int: $lastNormalizedDegreeInt")
-          Log.d(TAG, "Raw reading normalised: ${rawCompassReading.normalizedDegrees.toInt()}")
-          lastNormalizedDegreeInt = compassReading.normalizedDegrees.toInt()
-          if (lastNormalizedDegreeInt == null || rawCompassReading.normalizedDegrees.toInt() != lastNormalizedDegreeInt) {
-            lastNormalizedDegreeInt = compassReading.normalizedDegrees.toInt()
-            Log.d(TAG, "invoke: Last Normalsed int: $lastNormalizedDegreeInt")
-            Log.d(TAG, "Raw reading normalised: ${rawCompassReading.normalizedDegrees.toInt()}")
-          }
+
+          if (lastNormalizedDegreeInt == null || compassReading.normalizedDegrees.toInt() != lastNormalizedDegreeInt) {
             emit(AppResult.Success(compassReading))
+            lastNormalizedDegreeInt = compassReading.normalizedDegrees.toInt()
+          }
         }
       } catch (e: AppException) {
         emit(AppResult.Error(e))
